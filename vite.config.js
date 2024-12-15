@@ -2,15 +2,16 @@ import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import path from "path";
 import { federation } from "@module-federation/vite";
+import tailwindcss from "tailwindcss";
 
 export default defineConfig({
   build: {
     target: "chrome89",
+    minify: false,
+    cssCodeSplit: false,
   },
   plugins: [
-    remix({
-      ignoredRouteFiles: ["**/*.css"],
-    }),
+    remix({}),
 
     federation({
       name: "webpage", // Tên module remote
@@ -22,6 +23,12 @@ export default defineConfig({
       // shared: ["react", "react-dom"], // Chia sẻ dependency
     }),
   ],
+
+  css: {
+    postcss: {
+      plugins: [tailwindcss()],
+    },
+  },
   resolve: {
     alias: {
       "~": path.resolve(__dirname, "./app"),
