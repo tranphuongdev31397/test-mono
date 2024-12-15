@@ -1,9 +1,8 @@
 import { Puck, type Data, type Config } from "@measured/puck";
 // @ts-ignore
-import styles from "@measured/puck/puck.css?url";
+import "@measured/puck/puck.css?url";
 import type {
   ActionFunctionArgs,
-  LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
@@ -13,7 +12,6 @@ import invariant from "tiny-invariant";
 
 import puckConfig from "~/puck.config";
 import { getPage, setPage } from "~/models/page.server";
-import ColorPicker from "~/modules/plugins/ColorPicker";
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const puckPath = params.puckPath || "/";
@@ -27,10 +25,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
   return json({ ok: true });
 };
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: styles, id: "puck-css" },
-];
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const puckPath = params.puckPath || "/";

@@ -8,7 +8,9 @@ export default defineConfig({
     target: "chrome89",
   },
   plugins: [
-    remix(),
+    remix({
+      ignoredRouteFiles: ["**/*.css"],
+    }),
 
     federation({
       name: "webpage", // Tên module remote
