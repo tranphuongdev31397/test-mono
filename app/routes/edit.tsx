@@ -1,5 +1,6 @@
 import { Puck, type Data, type Config } from "@measured/puck";
-import styles from "@measured/puck/puck.css";
+// @ts-ignore
+import styles from "@measured/puck/puck.css?url";
 import type {
   ActionFunctionArgs,
   LinksFunction,
@@ -12,6 +13,7 @@ import invariant from "tiny-invariant";
 
 import puckConfig from "~/puck.config";
 import { getPage, setPage } from "~/models/page.server";
+import ColorPicker from "~/modules/plugins/ColorPicker";
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const puckPath = params.puckPath || "/";
@@ -45,12 +47,20 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   return [{ title: `Editing: ${title}` }];
 };
 
+const MyPlugin = {
+  overrides: {
+    componentItem: ({ name }: any) => (
+      <div style={{ backgroundColor: "hotpink" }}>{name}</div>
+    ),
+  },
+};
 export default function Edit() {
   const { initialData } = useLoaderData<typeof loader>();
   const submit = useSubmit();
 
   return (
     <Puck
+      plugins={[MyPlugin]}
       config={puckConfig as Config}
       data={initialData}
       onPublish={async (data: Data) => {
@@ -59,6 +69,26 @@ export default function Edit() {
         formData.append("puckData", JSON.stringify(data));
         submit(formData, { method: "post" });
       }}
+      viewports={[
+        {
+          width: 360,
+          height: "auto",
+          icon: "Smartphone",
+          label: "Small",
+        },
+        {
+          width: 768,
+          height: "auto",
+          icon: "Tablet",
+          label: "Medium",
+        },
+        {
+          width: 1920,
+          height: "auto",
+          icon: "Monitor",
+          label: "Large",
+        },
+      ]}
     />
   );
 }
