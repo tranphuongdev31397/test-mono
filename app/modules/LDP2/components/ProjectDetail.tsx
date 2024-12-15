@@ -1,4 +1,5 @@
-import "~/tailwind.css";
+import "../../../tailwind.css?url";
+
 export interface ProjectDetailProps {
   title: string;
   desc: string;
