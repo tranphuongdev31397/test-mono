@@ -7,11 +7,7 @@ export interface ProjectDetailProps {
   backgroundColor: string;
 }
 
-import styles from "~/tailwind.css?url";
-
-export const links = () => {
-  return [{ rel: "stylesheet", href: styles }];
-};
+import "~/tailwind.css";
 
 export default function ProjectDetail({
   title,
