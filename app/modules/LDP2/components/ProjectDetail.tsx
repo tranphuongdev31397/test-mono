@@ -1,4 +1,4 @@
-import "../../../tailwind.css?url";
+import Location from "./common/Location";
 
 export interface ProjectDetailProps {
   title: string;
@@ -6,6 +6,12 @@ export interface ProjectDetailProps {
   image: string;
   backgroundColor: string;
 }
+
+import styles from "~/tailwind.css?url";
+
+export const links = () => {
+  return [{ rel: "stylesheet", href: styles }];
+};
 
 export default function ProjectDetail({
   title,
@@ -40,28 +46,7 @@ export default function ProjectDetail({
 
               <hr className="text-black bg-black h-0.5" />
 
-              <div className="grid grid-cols-2 last:col-span-full grid-flow-row gap-y-4 md:gap-y-6 gap-x-6 md:gap-x-12">
-                <div className="flex flex-col last:col-span-full">
-                  <h5>Location</h5>
-                  <p>D05 - Buona Vista / West Coast</p>
-                </div>
-                <div className="flex flex-col last:col-span-full">
-                  <h5>Location</h5>
-                  <p>D05 - Buona Vista / West Coast</p>
-                </div>
-                <div className="flex flex-col last:col-span-full">
-                  <h5>Location</h5>
-                  <p>D05 - Buona Vista / West Coast</p>
-                </div>
-
-                <div className="flex flex-col odd:last:col-span-full">
-                  <h5>Project Category</h5>
-                  <p>
-                    Residential Development Comprising 2 Blocks of 11 Storey and
-                    1 Block of 7 Storey Tower
-                  </p>
-                </div>
-              </div>
+              <Location />
             </div>
           </div>
         </div>

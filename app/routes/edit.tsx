@@ -1,6 +1,6 @@
 import { Puck, type Data, type Config } from "@measured/puck";
 // @ts-ignore
-import "@measured/puck/puck.css?url";
+import styles from "@measured/puck/puck.css?url";
 import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
@@ -24,6 +24,10 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   setPage(puckPath, JSON.parse(puckData));
 
   return json({ ok: true });
+};
+
+export const links = () => {
+  return [{ rel: "stylesheet", href: styles }];
 };
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
